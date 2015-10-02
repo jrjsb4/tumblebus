@@ -1,1 +1,1 @@
-curl -H Content-Type: application/json -X POST -d firstname:Jason,lastname:Beauvais http://127.0.0.1:5100/Parent/
+curl -H Content-Type: application/json -X POST -d firstname:Joe,lastname:Blow http://127.0.0.1:5100/Parent/

@@ -29,12 +29,12 @@ func TestSchoolDb(t *testing.T) {
 	t.Log("Adding School #1")
 	school := School{
 		Name:        "Holy Family",
-		Address:     "South Street",
-		City:        "Fitchburg",
-		State:       "MA",
-		ZipCode:     "01420",
+		Address:     "Main Street",
+		City:        "Cypress",
+		State:       "FL",
+		ZipCode:     "98310",
 		MainPhone:   "978-234-1234",
-		ContactName: "Sister Julie",
+		ContactName: "Sister Mary Francis",
 		Url:         "http://www.holyfamily.org",
 	}
 	err = c.AddSchool(&school)
@@ -51,12 +51,12 @@ func TestSchoolDb(t *testing.T) {
 	t.Log("Adding school #2")
 	school = School{
 		Name:        "Oakmont",
-		Address:     "South Asburnham Road",
-		City:        "Asburnham",
-		State:       "MA",
+		Address:     "South  Road",
+		City:        "Nevada",
+		State:       "TX",
 		ZipCode:     "10452",
 		MainPhone:   "978-234-1234",
-		ContactName: "Sam Beauvais",
+		ContactName: "Sam Blow",
 		Url:         "http://www.oakmont.org",
 	}
 	err = c.AddSchool(&school)
@@ -68,12 +68,12 @@ func TestSchoolDb(t *testing.T) {
 	t.Log("Checking to make sure we can't add duplicate schools")
 	school = School{
 		Name:        "Holy Family",
-		Address:     "South Street",
-		City:        "Fitchburg",
-		State:       "MA",
-		ZipCode:     "01420",
+		Address:     "Main Street",
+		City:        "Cypress",
+		State:       "FL",
+		ZipCode:     "98310",
 		MainPhone:   "978-234-1234",
-		ContactName: "Sister Julie",
+		ContactName: "Sister Mary Francis",
 		Url:         "http://www.holyfamily.org",
 	}
 	err = c.AddSchool(&school)
@@ -102,8 +102,8 @@ func TestSchoolDb(t *testing.T) {
 	}
 	t.Log("School: ", s)
 
-	s.City = "Leominster"
-	s.ZipCode = "01453"
+	s.City = "Some City"
+	s.ZipCode = "23334"
 
 	err = c.UpdateSchool(s)
 	if err != nil {
@@ -146,26 +146,26 @@ func TestAddClient(t *testing.T) {
 	defer c.CloseConnection()
 
 	parent := Parent{
-		FirstName:    "Jason",
-		LastName:     "Beauvais",
-		Address:      "60 Drepanos Drive",
-		City:         "Fitchburg",
+		FirstName:    "Joe",
+		LastName:     "Blind",
+		Address:      "60 Desopt Drive",
+		City:         "New City",
 		State:        "MA",
-		ZipCode:      "01420",
-		HomePhone:    "978-665-9618",
-		MobilePhone:  "978-505-2403",
-		EmailAddress: "jrjsb4@gmail.com",
+		ZipCode:      "93821",
+		HomePhone:    "123-357-6532",
+		MobilePhone:  "442-563-6742",
+		EmailAddress: "joeblind@someemail.com",
 	}
 
 	children := make([]Child, 2)
 
 	children[0].FirstName = "Jacob"
-	children[0].LastName = "Beauvais"
+	children[0].LastName = "Bling"
 	children[0].DOB = time.Date(1996, time.September, 13, 0, 0, 0, 0, time.Local)
 	children[0].Age = 19
 
 	children[1].FirstName = "Samuel"
-	children[1].LastName = "Beauvais"
+	children[1].LastName = "Blind"
 	children[1].DOB = time.Date(1999, time.April, 6, 0, 0, 0, 0, time.Local)
 	children[1].Age = 16
 
@@ -193,23 +193,23 @@ func TestAddClient(t *testing.T) {
 
 	parent = Parent{
 		FirstName:    "Mary",
-		LastName:     "Keller",
-		Address:      "16 Harris Drive",
-		City:         "Nrthborogh",
-		State:        "MA",
+		LastName:     "Keys",
+		Address:      "16 Readind Drive",
+		City:         "Old City",
+		State:        "NM",
 		ZipCode:      "01732",
-		HomePhone:    "978-665-9618",
-		MobilePhone:  "978-505-2403",
-		EmailAddress: "mkeller@gmail.com",
+		HomePhone:    "332-322-2332",
+		MobilePhone:  "856-212-3232",
+		EmailAddress: "mkeys@someemail.com",
 	}
 
 	children[0].FirstName = "Simon"
-	children[0].LastName = "Keller"
+	children[0].LastName = "Keys"
 	children[0].DOB = time.Date(1999, time.April, 13, 0, 0, 0, 0, time.Local)
 	children[0].Age = 19
 
 	children[1].FirstName = "Matt"
-	children[1].LastName = "Keller"
+	children[1].LastName = "Keys"
 	children[1].DOB = time.Date(2001, time.November, 30, 0, 0, 0, 0, time.Local)
 	children[1].Age = 16
 
@@ -221,7 +221,7 @@ func TestAddClient(t *testing.T) {
 		EndDate:      time.Date(2016, time.February, 19, 0, 0, 0, 0, time.Local),
 		CcNumber:     "1223 2344 1234 2344",
 		SecurityCode: "123",
-		CcName:       "Mary Keller",
+		CcName:       "Mary Keys",
 	}
 
 	err = c.AddClient("Oakmont", &parent, children, &paymentInfo)
@@ -230,7 +230,7 @@ func TestAddClient(t *testing.T) {
 	}
 
 	client := &Client{}
-	client, err = c.FindClient("Jaosn", "Beauvais")
+	client, err = c.FindClient("Joe", "Blind")
 	if err != nil {
 		t.Error("Unable to find client")
 	}
@@ -255,7 +255,7 @@ func TestAddClient(t *testing.T) {
 	}
 
 	var id string
-	id, err = c.GetClientId("Jason", "Beauvais")
+	id, err = c.GetClientId("Joe", "Blind")
 	if err != nil {
 		t.Error("Failed to get id")
 	}
@@ -294,7 +294,7 @@ func TestAddClient(t *testing.T) {
 		t.Error("Failed to add payment #3")
 	}
 
-	client, err = c.FindClient("Jaosn", "Beauvais")
+	client, err = c.FindClient("Jaosn", "Blind")
 	if err != nil {
 		t.Error("Unable to find client")
 	}
